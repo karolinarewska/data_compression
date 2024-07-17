@@ -13,15 +13,8 @@ def create_huffman_codes(huffman_tree):
 ################################################################################
 def huffman_encode(Input_data, codes):
     # Create new table for Input data - as a difference between [x] and [x+1] element
-    diff_data = []
-    abs_data = []
-    for x in range(len(Input_data) - 1):
-        if Input_data[x] - Input_data[x + 1] >= 0:
-            abs_data.append(0)
-        else:
-            abs_data.append(1)
-
-        diff_data.append(abs(Input_data[x] - Input_data[x + 1]))
+    diff_data = [abs(Input_data[i] - Input_data[i + 1]) for i in range(len(Input_data) - 1)]
+    abs_data = [0 if Input_data[i] >= Input_data[i + 1] else 1 for i in range(len(Input_data) - 1)]
 
     # Removing first value from Input and assign it as first_element
     first_element = Input_data[0]
@@ -92,7 +85,7 @@ def huffman_decode(stream_array, codes):
 ################################################################################
 # TEST BENCH
 ################################################################################
-time_start = time.ticks_cpu()
+#time_start = time.ticks_cpu()
 data_to_encode = []
 size_of_first_element = 12
 
@@ -130,6 +123,6 @@ if encoded_data is not None:
 else:
     print("Encoding failed due to missing Huffman code for a character.")
 
-time_stop = time.ticks_cpu()
-time = time_stop - time_start
-print("Time of running program:", time)
+#time_stop = time.ticks_cpu()
+#time = time_stop - time_start
+#("Time of running program:", time)

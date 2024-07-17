@@ -23,16 +23,17 @@ def create_huffman_tree(freq_dict):
 
 
 ################################################################################
-# Char frequency calculation
+# Merge alfabet and counts into one dictionary
 ################################################################################
-def calculate_frequency(text):
-    freq_dict = {}
-    for char in text:
-        if char in freq_dict:
-            freq_dict[char] += 1
-        else:
-            freq_dict[char] = 1
-    return freq_dict
+def merge_arrays_to_dict(keys, values):
+    # Check if both lists have the same length
+    if len(keys) != len(values):
+        raise ValueError("Both tables have to have the same length.")
+
+    # Merge lists into one dictionary
+    merged_dict = {keys[i]: values[i] for i in range(len(keys))}
+
+    return merged_dict
 
 
 ################################################################################
@@ -63,14 +64,15 @@ alphabet, counts = read_csv_and_create_arrays(file_path)
 print(alphabet)
 print(counts)
 
-freq_dict = calculate_frequency(alphabet)
+freq_dict = merge_arrays_to_dict(alphabet, counts)
 print(freq_dict)
 huffman_tree = create_huffman_tree(freq_dict)
 print(huffman_tree)
 
 with open('huffman_tree_winter.json', 'w') as outfile:
     json.dump(huffman_tree, outfile)
+    print("PASSED")
 
-print("Drzewo Huffmana zostało zapisane do pliku 'huffman_tree.json'")
+
 
 
